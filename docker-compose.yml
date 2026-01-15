@@ -1,28 +1,3 @@
-# version: "3.9"
-
-# services:
-#   dealership-ai:
-#     image: dealership-ai
-#     container_name: dealership-ai
-#     build: .
-#     ports:
-#       - "80:8000"     # AWS public HTTP → FastAPI
-#     env_file:
-#       - .env
-#     restart: always
-
-#     volumes:
-#       # Persist SQLite DB + logs
-#       - ./data:/app/data
-#       - ./logs:/app/logs
-
-#     healthcheck:
-#       test: ["CMD", "curl", "-f", "http://localhost:8000/docs"]
-#       interval: 30s
-#       timeout: 10s
-#       retries: 5
-
-
 services:
   dealership-ai:
     build: .

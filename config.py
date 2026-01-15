@@ -1,22 +1,8 @@
-# import os
-# from dotenv import load_dotenv
-
-# load_dotenv()
-
-# class Config:
-#     HF_TOKEN = os.getenv("HUGGINGFACE_API_KEY")
-#     GROQ_TOKEN=os.getenv("GROQ_API_KEY")
-#     MODEL_NAME = os.getenv("MODEL_NAME")
-#     DEEPGRAM_API_KEY=os.getenv("DEEPGRAM_API_KEY")
-#     CARS_DB_PATH = os.path.join(os.path.dirname(__file__), "data/cars.json")
-#     DEBUG = True
-
-
 import os
 from dotenv import load_dotenv
 import pathlib
 
-# Load .env automatically
+
 env_path = pathlib.Path(__file__).parent / ".env"
 load_dotenv(dotenv_path=env_path)
 class Config:

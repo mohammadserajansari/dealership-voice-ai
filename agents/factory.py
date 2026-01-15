@@ -11,9 +11,9 @@ class DealershipCrew:
         self.llm = LLM(
             model=Config.MODEL_NAME,
             api_key=Config.GROQ_TOKEN,
-            base_url="https://api.groq.com/openai/v1",  # GROQ endpoint
+            base_url="https://api.groq.com/openai/v1",  
             temperature=0,
-            provider="groq"  # explicitly set provider
+            provider="groq"  
         )
 
     def _agent(self):

@@ -9,7 +9,7 @@ receptionist = Agent(
     llm={
         "model": Config.LLM_MODEL,
         "temperature": 0,
-        "response_format": BookingToolCall,   # 🔥 THIS IS THE FIX
+        "response_format": BookingToolCall,  
     },
     verbose=True
 )

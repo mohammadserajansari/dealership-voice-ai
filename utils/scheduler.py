@@ -14,9 +14,7 @@ WEEKDAYS = {
     "friday": 4, "saturday": 5, "sunday": 6
 }
 
-# -----------------------------
-# DATE NORMALIZATION
-# -----------------------------
+
 def normalize_date(text: str) -> str:
     text = text.lower().strip()
     now_utc = datetime.now(timezone.utc)
@@ -27,7 +25,7 @@ def normalize_date(text: str) -> str:
     if text in ["tomorrow", "tmr", "tmrw"]:
         return (today + timedelta(days=1)).isoformat()
 
-    # in X days / after X days
+
     m = re.search(r"(?:in|after)\s+(\w+)", text)
     if m:
         val = m.group(1)
@@ -36,7 +34,7 @@ def normalize_date(text: str) -> str:
             offset = days if "in" in text else days + 1
             return (today + timedelta(days=offset)).isoformat()
 
-    # before / after Xth of month
+
     m = re.search(r"(before|after)\s+(\d{1,2})(?:th|st|nd|rd)?", text)
     if m:
         direction, day = m.groups()
@@ -51,7 +49,7 @@ def normalize_date(text: str) -> str:
         else:
             return (target_date + timedelta(days=1)).isoformat()
 
-    # weekday handling: next Monday / this Friday
+
     m = re.search(r"(next|this)?\s*(monday|tuesday|wednesday|thursday|friday|saturday|sunday)", text)
     if m:
         prefix, day_name = m.groups()
@@ -61,27 +59,25 @@ def normalize_date(text: str) -> str:
             delta_days += 7
         return (today + timedelta(days=delta_days)).isoformat()
 
-    # Specific month/day: Jan 16 / January 16
+
     for fmt in ("%B %d", "%b %d"):
         try:
             return datetime.strptime(text, fmt).replace(year=today.year).date().isoformat()
         except:
             continue
 
-    # ISO format
+
     try:
         return datetime.fromisoformat(text).date().isoformat()
     except:
         raise ValueError(f"Invalid date format: {text}")
 
 
-# -----------------------------
-# TIME NORMALIZATION
-# -----------------------------
+
 def normalize_time(text: str) -> str:
     text = text.lower().replace(".", "").strip()
 
-    # 1pm / 1:30pm
+
     m = re.match(r"(\d{1,2})(:(\d{2}))?\s*(am|pm)", text)
     if m:
         hour = int(m.group(1))
@@ -93,14 +89,14 @@ def normalize_time(text: str) -> str:
             hour = 0
         return f"{hour:02d}:{minute:02d}"
 
-    # 24h format
+
     try:
         t = datetime.strptime(text, "%H:%M")
         return t.strftime("%H:%M")
     except:
         pass
 
-    # relative slots
+
     slots = {"morning": "09:00", "afternoon": "14:00", "evening": "17:00"}
     if text in slots:
         return slots[text]
@@ -108,9 +104,7 @@ def normalize_time(text: str) -> str:
     raise ValueError(f"Invalid time format: {text}")
 
 
-# -----------------------------
-# CONFLICT CHECK
-# -----------------------------
+
 def slot_available(model: str, date: str, time: str) -> bool:
     with sqlite3.connect(DB_PATH) as conn:
         cur = conn.cursor()
@@ -125,12 +119,12 @@ def next_available_slots(model: str, date: str, time: str, n=3) -> list:
     """Return next `n` available half-hour slots"""
     hour, minute = map(int, time.split(":"))
     slots = []
-    for _ in range(24):  # check next 12 hours in 30-min increments
+    for _ in range(24):  
         minute += 30
         if minute >= 60:
             minute -= 60
             hour += 1
-        if hour >= 20:  # closing time 8 PM
+        if hour >= 20:  
             break
         new_time = f"{hour:02d}:{minute:02d}"
         if slot_available(model, date, new_time):

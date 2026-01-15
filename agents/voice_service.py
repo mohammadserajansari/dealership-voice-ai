@@ -7,7 +7,7 @@ from fastapi.responses import StreamingResponse
 from config import Config
 from agents.factory import DealershipCrew
 
-# Initialize the crew
+
 crew = DealershipCrew()
 
 async def transcribe_audio(audio_data: bytes):
@@ -29,15 +29,15 @@ def clean_speech(raw_text: str):
     Extracts speech from tags. If no tags found, cleans up technical 
     characters to make the raw text readable for TTS.
     """
-    # 1. Try to find content inside <speech> tags
+
     matches = re.findall(r"<speech>(.*?)</speech>", raw_text, re.DOTALL)
     if matches:
         return " ".join(m.strip() for m in matches)
     
-    # 2. Fallback: If no tags, clean up the raw output for voice
-    # Remove common AI "thought" artifacts or markdown
-    clean = re.sub(r"[`*#_]", "", raw_text)  # Remove markdown bold/italic/code
-    clean = re.sub(r"\{.*?\}", "", clean)    # Remove JSON-like curly braces
+
+
+    clean = re.sub(r"[`*#_]", "", raw_text)  
+    clean = re.sub(r"\{.*?\}", "", clean)    
     clean = clean.replace("SUCCESS:", "Success.")
     clean = clean.replace("BK-", "Booking reference ")
     
@@ -47,7 +47,7 @@ def clean_speech(raw_text: str):
     return clean if clean else "I'm sorry, I encountered an error. How can I help you today?"
 
 def generate_voice_response(text, sid, user_text=""):
-    # Ensure text isn't empty for Deepgram
+
     if not text.strip():
         text = "I'm listening. Please go ahead."
 
@@ -86,9 +86,9 @@ def generate_voice_response(text, sid, user_text=""):
     )
 
 def process_crew_logic(user_text, history):
-    # Kickoff the agent workflow
+
     result = crew.run_workflow(user_text, chat_history=history)
     
-    # Convert CrewOutput to string and clean it
+
     raw_output = str(result.raw)
     return clean_speech(raw_output)
