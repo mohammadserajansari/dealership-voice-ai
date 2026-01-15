@@ -154,4 +154,4 @@ Booking Logs: All confirmed test drives are saved in bookings.db and logged in l
 Speech Formatting: The system uses <speech> tags to separate internal AI reasoning from spoken output, ensuring a clean voice experience.
 
 
-Developed with by [Mohammad Seraj](https://www.linkedin.com/in/ansariserajmd/)
+Developed by [Mohammad Seraj](https://www.linkedin.com/in/ansariserajmd/)
