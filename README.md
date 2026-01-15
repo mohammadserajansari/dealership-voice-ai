@@ -10,6 +10,59 @@ An intelligent, voice-activated dealership receptionist powered by **CrewAI**, *
 * **Smart Scheduling:** Normalizes natural language dates (e.g., "next Tuesday") and checks for booking conflicts in SQLite.
 * **Time-Aware Greetings:** Automatically greets users with "Good Morning," "Good Afternoon," or "Good Evening" based on the time of day.
 
+### 🧩 Workflow
+
+1. The user speaks to the system through the website.
+2. The voice is converted into text using speech recognition.
+3. The AI reads the text and checks previous conversation memory.
+4. The AI decides what the user wants to do.
+5. If the user asks about cars, the AI checks the car list.
+6. If the user wants to book, the AI checks if the car exists.
+7. Then it checks if the requested date and time are available.
+8. If the slot is free, the booking is saved.
+9. The AI creates a confirmation message.
+10. The message is converted into voice and played to the user.
+
+```Plaintext
+User speaks
+   |
+   v
+Voice converted to text
+   |
+   v
+AI reads the message
+   |
+   v
+What does the user want?
+   |
+   ├── Ask about cars?
+   |       |
+   |       v
+   |   Check car list
+   |       |
+   |   Reply with available cars
+   |
+   └── Book a test drive?
+           |
+           v
+       Check if car exists
+           |
+           v
+       Check if date & time is available
+           |
+           ├── Not available
+           |       |
+           |   Suggest another time
+           |
+           └── Available
+                   |
+               Save booking
+                   |
+               Confirm to user (voice reply)
+
+```
+
+
 ### 📁 Project Structure
 ```Plaintext
 ├── agents
