@@ -101,7 +101,7 @@ What does the user want?
 
 ### 1. Clone the Repository
 ```bash
-git clone "[https://github.com/mohammadserajansari/dealership-voice-ai.git](https://github.com/mohammadserajansari/dealership-voice-ai.git)"
+git clone https://github.com/mohammadserajansari/dealership-voice-ai.git
 cd dealership-voice-ai
 ```
 ### 2. Environment Setup
