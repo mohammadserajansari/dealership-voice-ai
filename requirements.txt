@@ -1,0 +1,17 @@
+# fastapi==0.127.0
+# uvicorn==0.40.0
+# crewai==1.8.0
+# langchain-community==0.4.1
+# python-dotenv==1.1.1
+# pydantic==2.11.10
+# deepgram-sdk==5.3.1
+# litellm==1.80.16
+
+fastapi==0.110.0
+crewai[llm]==1.8.0
+litellm>=0.3.0
+langchain-community==0.0.21
+deepgram-sdk==3.2.0
+openai==1.83.0
+
+

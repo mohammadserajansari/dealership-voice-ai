@@ -1,0 +1,14 @@
+
+[
+  {
+    "model": "SUV",
+    "variants": ["Standard", "Luxury"],
+    "features": ["AWD", "Sunroof", "Navigation"]
+  },
+  {
+    "model": "Sedan",
+    "variants": ["Standard", "Sport"],
+    "features": ["Eco", "Leather Seats", "Bluetooth"]
+  }
+]
+
