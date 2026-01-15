@@ -1,15 +1,3 @@
-# from pydantic import BaseModel
-
-# class BookingArguments(BaseModel):
-#     model: str
-#     date: str
-#     time: str
-
-# class BookingToolCall(BaseModel):
-#     tool: str
-#     arguments: BookingArguments
-
-
 from pydantic import BaseModel
 from typing import Literal
 
